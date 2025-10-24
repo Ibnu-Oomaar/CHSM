@@ -1,0 +1,560 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  // output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+/// ---------- ENUMS ----------
+enum Role {
+  superAdmin
+  government
+  hospital
+  pharmacist
+  airport_verifier
+  vet
+}
+
+enum AppointmentType {
+  in_person
+  video
+}
+
+enum AppointmentStatus {
+  pending
+  confirmed
+  completed
+  cancelled
+  no_show
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  failed
+  refunded
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum OrderStatus {
+  pending
+  confirmed
+  dispensed
+  cancelled
+  returned
+}
+
+enum TerminalType {
+  airport
+  seaport
+  land_port
+  kiosk
+}
+
+enum PaymentMethod {
+  Stripe
+  card
+  cash
+}
+
+/// ---------- MODELS ----------
+
+
+model RefreshToken {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  hashedToken String
+  device      String?
+  ip          String?
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  revoked     Boolean  @default(false)
+  replacedBy  String?
+  @@index([userId])
+  @@index([revoked, expiresAt])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  device    String?
+  ip        String?
+  createdAt DateTime @default(now())
+  lastSeen  DateTime?
+  revoked   Boolean  @default(false)
+  @@index([userId])
+}
+
+model Permission {
+  id   String @id @default(cuid())
+  name String @unique
+  desc String?
+  roles RolePermission[]
+}
+
+model RolePermission {
+  id String @id @default(cuid())
+  role Role
+  permission Permission @relation(fields: [permissionId], references: [id])
+  permissionId String
+}
+
+model User {
+  id               String          @id @default(cuid())
+  name             String
+  email            String         @unique
+  phone            String
+  password         String
+  role             Role 
+  hospital         Hospital?       @relation("HospitalAdmins", fields: [hospitalId], references: [id])
+  hospitalId       String
+  hospitalName     String
+  doctor           Doctor?
+  patient          Patient?
+  pharmacist       Pharmacist?
+  airportVerifier  AirportVerifier?
+  vet              Vet?
+  RefreshToken    RefreshToken[]
+  sessions         Session[]
+  sentMessages     ChatMessage[]   @relation("SentMessages")
+  receivedMessages ChatMessage[]   @relation("ReceivedMessages")
+  airportChecks    AirportCheck[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @default(now())
+}
+
+
+enum hospitalRole {
+  admin
+  doctor
+  nurse
+  patient
+  pharmacist
+}
+
+
+model HospitalUser {
+  id          String       @id @default(cuid())
+  name       String
+  phone      String
+  email      String       @unique
+  password  String
+  hospital    Hospital     @relation(fields: [hospitalId], references: [id])
+  hospitalId  String
+  hospitalName String
+  role        hospitalRole   @default(patient)
+  createdAt   DateTime     @default(now())
+}
+
+
+model Hospital {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  code        String      @unique
+  description String
+  address     String
+  phone       String
+  email       String     @unique
+  departments Department[]
+  doctors     Doctor[]
+  admins      User[]       @relation("HospitalAdmins")
+  pharmacies  Pharmacy[]
+  hospitalUsers HospitalUser[]
+  appointments Appointment[]
+  labResults  LabResult[]
+  vets        Vet[]
+  prescriptions Prescription[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+
+model Department {
+  id         String   @id @default(cuid())
+  hospital   Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId String
+  hospitalName String
+  name       String
+  code       String @unique
+  doctors    Doctor[]
+  createdAt  DateTime @default(now())
+
+  @@unique([hospitalId, code], name: "unique_department_per_hospital")
+}
+
+
+model AirportVerifier {
+  id        String @id @default(cuid())
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String @unique
+  createdAt DateTime @default(now())
+}
+
+model Doctor {
+  id             String      @id @default(cuid())
+  user           User        @relation(fields: [userId], references: [id])
+  userId         String      @unique
+  hospital       Hospital    @relation(fields: [hospitalId], references: [id])
+  hospitalId     String
+  department     Department? @relation(fields: [departmentId], references: [id])
+  departmentId   String
+  departmentName String
+  specialization String
+  bio            String
+  appointments   Appointment[]
+  prescriptions  Prescription[]
+  labResults     LabResult[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @default(now())
+}
+
+model Patient {
+  id              String         @id @default(cuid())
+  user            User?          @relation(fields: [userId], references: [id])
+  userId          String       @unique
+  nationalId      String       @unique
+  name            String
+  address         String
+  phone           String     
+  dob             DateTime @default(now())
+  gender          Gender
+  qrToken         String       
+  qrTokenExpires  DateTime @default(now())
+  profilePhoto    String
+  isDeleted       Boolean        @default(false)
+  deletedAt       DateTime @default(now())
+  healthRecords   HealthRecord[]
+  appointments    Appointment[]
+  prescriptions   Prescription[]
+  births          BirthRecord[]
+  deaths          DeathRecord[]
+  labResults      LabResult[]
+  vaccinations    Vaccination[]
+  airportChecks   AirportCheck[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now())
+
+  @@index([nationalId])
+  @@index([qrToken])
+}
+
+model Appointment {
+  id            String            @id @default(cuid())
+  patient       Patient           @relation(fields: [patientId], references: [id])
+  patientId     String
+  patientName   String
+  doctor        Doctor?           @relation(fields: [doctorId], references: [id])
+  doctorId      String
+  doctorName    String
+  hospital      Hospital          @relation(fields: [hospitalId], references: [id])
+  hospitalId    String
+  hospitalName  String
+  type          AppointmentType
+  status        AppointmentStatus @default(pending)
+  scheduledAt   DateTime
+  durationMins  String
+  notes         String
+  videoRoomId   String
+  price         Float
+  payment       Payment?          @relation(fields: [paymentId], references: [id])
+  paymentId     String        @unique
+  chatMessages  ChatMessage[]
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @default(now())
+
+  @@index([hospitalId, scheduledAt, status])
+}
+
+model HealthRecord {
+  id          String    @id @default(cuid())
+  patient     Patient   @relation(fields: [patientId], references: [id])
+  patientId   String
+  patientName String
+  recordType  String    
+  title       String
+  details     String
+  issuedBy    String
+  issuedAt    DateTime  @default(now())
+  attachments Media[]   @relation("HealthRecordAttachments")
+  createdAt   DateTime  @default(now())
+}
+
+model LabResult {
+  id          String    @id @default(cuid())
+  patient     Patient   @relation(fields: [patientId], references: [id])
+  patientId   String
+  patientName String
+  doctor      Doctor?   @relation(fields: [doctorId], references: [id])
+  doctorId    String
+  doctorName  String
+  hospital    Hospital  @relation(fields: [hospitalId], references: [id])
+  hospitalId  String
+  hospitalName String
+  testName    String
+  result      String
+  unit        String
+  reference   String
+  takenAt     DateTime @default(now())
+  reportedAt  DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+
+  @@index([reportedAt])
+}
+
+model Vaccination {
+  id             String   @id @default(cuid())
+  patient        Patient  @relation(fields: [patientId], references: [id])
+  patientId      String
+  patientName    String
+  vaccineName    String
+  dose           String
+  batchNumber    String
+  administeredBy String
+  administeredAt DateTime @default(now())
+  certificateUrl String
+  createdAt      DateTime @default(now())
+}
+
+model Prescription {
+  id             String          @id @default(cuid())
+  patient        Patient         @relation(fields: [patientId], references: [id])
+  patientId      String
+  doctor         Doctor          @relation(fields: [doctorId], references: [id])
+  doctorId       String
+  doctorName     String
+  hospital       Hospital        @relation(fields: [hospitalId], references: [id])
+  hospitalId     String
+  hospitalName   String
+  issuedAt       DateTime        @default(now())
+  items          String        
+  validUntil     DateTime @default(now())
+  verified       Boolean         @default(false)
+  verifiedById   String 
+  verifiedBy     Pharmacist?     @relation(fields: [verifiedById], references: [id])
+  verificationAt DateTime?
+  pharmacyOrders PharmacyOrder[]
+  createdAt      DateTime        @default(now())
+
+  @@index([issuedAt])
+  @@index([patientId])
+}
+
+model Pharmacy {
+  id          String       @id @default(cuid())
+  name         String @unique
+  location    String
+  phone       String
+  email       String @unique
+  hospital    Hospital?    @relation(fields: [hospitalId], references: [id])
+  hospitalId  String
+  hospitalName String
+  verified    Boolean      @default(false)
+  orders      PharmacyOrder[]
+  pharmacists Pharmacist[]
+  createdAt   DateTime     @default(now())
+}
+
+model Pharmacist {
+  id         String          @id @default(cuid())
+  user       User            @relation(fields: [userId], references: [id])
+  userId     String          @unique
+  pharmacy   Pharmacy?       @relation(fields: [pharmacyId], references: [id])
+  pharmacyId String
+  prescriptions  Prescription[]
+  orders     PharmacyOrder[]
+  createdAt  DateTime        @default(now())
+}
+
+model PharmacyOrder {
+  id             String       @id @default(cuid())
+  pharmacy       Pharmacy     @relation(fields: [pharmacyId], references: [id])
+  pharmacyId     String
+  prescription   Prescription @relation(fields: [prescriptionId], references: [id])
+  prescriptionId String
+  items          String
+  totalCents     Int
+  status         OrderStatus  @default(pending)
+  dispensedById  String   
+  dispensedBy    Pharmacist?  @relation(fields: [dispensedById], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([status, createdAt])
+}
+
+model AirportCheck {
+  id          String   @id @default(cuid())
+  checkedBy   User     @relation(fields: [checkedById], references: [id])
+  checkedById String
+  patientId   String
+  patientName String
+  patient     Patient? @relation(fields: [patientId], references: [id])
+  result      String
+  checkedAt   DateTime @default(now())
+  source      String
+  offline     Boolean  @default(false)
+
+  @@index([checkedAt])
+  @@index([patientId])
+}
+
+model LivestockRecord {
+  id             String   @id @default(cuid())
+  ownerName      String
+  consignmentId  String   @unique
+  species        String
+  quantity       Int
+  originFarm     String
+  vetId          String
+  vetName        String
+  vet            Vet?     @relation(fields: [vetId], references: [id])
+  healthCertUrl  String
+  issuedAt       DateTime @default(now())
+  expiresAt      DateTime @default(now())
+  createdAt      DateTime @default(now())
+}
+
+model BirthRecord {
+  id         String   @id @default(uuid())
+  patientId  String
+  patientName String
+  patient    Patient? @relation(fields: [patientId], references: [id])
+  childName  String
+  dob        DateTime @default(now())
+  place      String
+  registeredBy String
+  createdAt  DateTime @default(now())
+}
+
+model DeathRecord {
+  id          String   @id @default(uuid())
+  patientId   String
+  patientName String
+  patient     Patient? @relation(fields: [patientId], references: [id])
+  date        DateTime
+  cause       String
+  reportedBy  String
+  createdAt   DateTime @default(now())
+}
+
+model Vet {
+  id       String @id @default(uuid())
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @unique
+  hospital Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId String
+  hospitalName String
+  livestockRecords LivestockRecord[]
+  createdAt DateTime @default(now())
+
+}
+
+
+
+model Payment {
+  id            String       @id @default(uuid())
+  amount      Float
+  currency      String       @default("SOS")
+  method        PaymentMethod @default(Stripe)
+  status        PaymentStatus @default(pending) 
+  payerId       String       // User ID
+  reference     String       // Stripe PaymentIntent ID
+  metadata      String       // Additional info from Stripe (optional)
+  appointment   Appointment?
+  appointmentId String @unique
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model Notification {
+  id         String  @id @default(uuid())
+  toUserId   String
+  title      String
+  body       String
+  data       String
+  read       Boolean @default(false)
+  channel    String
+  createdAt  DateTime @default(now())
+}
+
+model SyncQueue {
+  id          String   @id @default(uuid())
+  source      String   
+  payload     String
+  model       String   
+  action      String   
+  processed   Boolean  @default(false)
+  processedAt DateTime
+  createdAt   DateTime @default(now())
+  terminalId  String?  
+  terminal    Terminal? @relation(fields: [terminalId], references: [id])
+
+  @@index([processed, createdAt])
+}
+
+model Media {
+  id         String   @id @default(uuid())
+  url        String
+  type       String
+  uploadedBy String
+  healthRecord HealthRecord? @relation("HealthRecordAttachments", fields: [healthRecordId], references: [id])
+  healthRecordId String?
+  createdAt  DateTime @default(now())
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  actorId    String
+  action     String
+  targetType String
+  targetId   String
+  details    String
+  createdAt  DateTime @default(now())
+}
+
+model Terminal {
+  id          String       @id @default(uuid())
+  name        String
+  type        TerminalType @default(kiosk)
+  location    String?
+  lastSeenAt  DateTime @default(now())
+  offline     Boolean      @default(true)
+  syncQueues  SyncQueue[]
+  createdAt   DateTime     @default(now())
+}
+
+model ChatMessage {
+  id            String    @id @default(uuid())
+  senderId      String
+  sender        User      @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId    String
+  receiver      User      @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  appointmentId String  
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id])
+  content       String
+  read          Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([appointmentId])
+  @@map("chat_messages")
+}
+
