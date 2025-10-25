@@ -1,20 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
-  // output   = "../src/generated/prisma"
+   output   = "../src/generated"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-
 
 /// ---------- ENUMS ----------
 enum Role {
@@ -23,7 +15,6 @@ enum Role {
   hospital
   pharmacist
   airport_verifier
-  vet
 }
 
 enum AppointmentType {
@@ -72,8 +63,15 @@ enum PaymentMethod {
   cash
 }
 
-/// ---------- MODELS ----------
+enum hospitalRole {
+  admin
+  doctor
+  nurse
+  patient
+  pharmacist
+}
 
+/// ---------- MODELS ----------
 
 model RefreshToken {
   id          String   @id @default(cuid())
@@ -110,28 +108,25 @@ model Permission {
 }
 
 model RolePermission {
-  id String @id @default(cuid())
-  role Role
-  permission Permission @relation(fields: [permissionId], references: [id])
+  id           String     @id @default(cuid())
+  role         Role
+  permission   Permission @relation(fields: [permissionId], references: [id])
   permissionId String
 }
 
 model User {
   id               String          @id @default(cuid())
   name             String
-  email            String         @unique
+  email            String          @unique
   phone            String
   password         String
-  role             Role 
-  hospital         Hospital?       @relation("HospitalAdmins", fields: [hospitalId], references: [id])
-  hospitalId       String
-  hospitalName     String
+  role             Role
+  hospitals        Hospital[]
   doctor           Doctor?
   patient          Patient?
   pharmacist       Pharmacist?
   airportVerifier  AirportVerifier?
-  vet              Vet?
-  RefreshToken    RefreshToken[]
+  RefreshToken     RefreshToken[]
   sessions         Session[]
   sentMessages     ChatMessage[]   @relation("SentMessages")
   receivedMessages ChatMessage[]   @relation("ReceivedMessages")
@@ -140,65 +135,52 @@ model User {
   updatedAt        DateTime        @default(now())
 }
 
-
-enum hospitalRole {
-  admin
-  doctor
-  nurse
-  patient
-  pharmacist
-}
-
-
 model HospitalUser {
-  id          String       @id @default(cuid())
-  name       String
-  phone      String
-  email      String       @unique
-  password  String
-  hospital    Hospital     @relation(fields: [hospitalId], references: [id])
-  hospitalId  String
+  id           String       @id @default(cuid())
+  name         String
+  phone        String
+  email        String       @unique
+  password     String
+  hospital     Hospital     @relation(fields: [hospitalId], references: [id])
+  hospitalId   String
   hospitalName String
-  role        hospitalRole   @default(patient)
-  createdAt   DateTime     @default(now())
+  role         hospitalRole @default(patient)
+  createdAt    DateTime     @default(now())
 }
-
 
 model Hospital {
-  id          String       @id @default(cuid())
-  name        String       @unique
-  code        String      @unique
-  description String
-  address     String
-  phone       String
-  email       String     @unique
-  departments Department[]
-  doctors     Doctor[]
-  admins      User[]       @relation("HospitalAdmins")
-  pharmacies  Pharmacy[]
+  id            String       @id @default(cuid())
+  name          String       @unique
+  code          String       @unique
+  description   String
+  address       String
+  phone         String
+  email         String       @unique
+  departments   Department[]
+  doctors       Doctor[]
+  userId        String
+  user          User         @relation(fields: [userId], references: [id])
+  pharmacies    Pharmacy[]
   hospitalUsers HospitalUser[]
-  appointments Appointment[]
-  labResults  LabResult[]
-  vets        Vet[]
+  appointments  Appointment[]
+  labResults    LabResult[]
   prescriptions Prescription[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
-
 model Department {
-  id         String   @id @default(cuid())
-  hospital   Hospital @relation(fields: [hospitalId], references: [id])
-  hospitalId String
+  id           String   @id @default(cuid())
+  hospital     Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId   String
   hospitalName String
-  name       String
-  code       String @unique
-  doctors    Doctor[]
-  createdAt  DateTime @default(now())
+  name         String
+  code         String   @unique
+  doctors      Doctor[]
+  createdAt    DateTime @default(now())
 
   @@unique([hospitalId, code], name: "unique_department_per_hospital")
 }
-
 
 model AirportVerifier {
   id        String @id @default(cuid())
@@ -228,18 +210,18 @@ model Doctor {
 model Patient {
   id              String         @id @default(cuid())
   user            User?          @relation(fields: [userId], references: [id])
-  userId          String       @unique
-  nationalId      String       @unique
+  userId          String         @unique
+  nationalId      String         @unique
   name            String
   address         String
-  phone           String     
-  dob             DateTime @default(now())
+  phone           String
+  dob             DateTime       @default(now())
   gender          Gender
-  qrToken         String       
-  qrTokenExpires  DateTime @default(now())
+  qrToken         String
+  qrTokenExpires  DateTime       @default(now())
   profilePhoto    String
   isDeleted       Boolean        @default(false)
-  deletedAt       DateTime @default(now())
+  deletedAt       DateTime       @default(now())
   healthRecords   HealthRecord[]
   appointments    Appointment[]
   prescriptions   Prescription[]
@@ -287,7 +269,7 @@ model HealthRecord {
   patient     Patient   @relation(fields: [patientId], references: [id])
   patientId   String
   patientName String
-  recordType  String    
+  recordType  String
   title       String
   details     String
   issuedBy    String
@@ -297,23 +279,23 @@ model HealthRecord {
 }
 
 model LabResult {
-  id          String    @id @default(cuid())
-  patient     Patient   @relation(fields: [patientId], references: [id])
-  patientId   String
-  patientName String
-  doctor      Doctor?   @relation(fields: [doctorId], references: [id])
-  doctorId    String
-  doctorName  String
-  hospital    Hospital  @relation(fields: [hospitalId], references: [id])
-  hospitalId  String
+  id           String    @id @default(cuid())
+  patient      Patient   @relation(fields: [patientId], references: [id])
+  patientId    String
+  patientName  String
+  doctor       Doctor?   @relation(fields: [doctorId], references: [id])
+  doctorId     String
+  doctorName   String
+  hospital     Hospital  @relation(fields: [hospitalId], references: [id])
+  hospitalId   String
   hospitalName String
-  testName    String
-  result      String
-  unit        String
-  reference   String
-  takenAt     DateTime @default(now())
-  reportedAt  DateTime  @default(now())
-  createdAt   DateTime  @default(now())
+  testName     String
+  result       String
+  unit         String
+  reference    String
+  takenAt      DateTime @default(now())
+  reportedAt   DateTime  @default(now())
+  createdAt    DateTime  @default(now())
 
   @@index([reportedAt])
 }
@@ -343,10 +325,10 @@ model Prescription {
   hospitalId     String
   hospitalName   String
   issuedAt       DateTime        @default(now())
-  items          String        
+  items          String
   validUntil     DateTime @default(now())
   verified       Boolean         @default(false)
-  verifiedById   String 
+  verifiedById   String
   verifiedBy     Pharmacist?     @relation(fields: [verifiedById], references: [id])
   verificationAt DateTime?
   pharmacyOrders PharmacyOrder[]
@@ -357,29 +339,29 @@ model Prescription {
 }
 
 model Pharmacy {
-  id          String       @id @default(cuid())
-  name         String @unique
-  location    String
-  phone       String
-  email       String @unique
-  hospital    Hospital?    @relation(fields: [hospitalId], references: [id])
-  hospitalId  String
+  id           String       @id @default(cuid())
+  name         String       @unique
+  location     String
+  phone        String
+  email        String       @unique
+  hospital     Hospital?    @relation(fields: [hospitalId], references: [id])
+  hospitalId   String
   hospitalName String
-  verified    Boolean      @default(false)
-  orders      PharmacyOrder[]
-  pharmacists Pharmacist[]
-  createdAt   DateTime     @default(now())
+  verified     Boolean      @default(false)
+  orders       PharmacyOrder[]
+  pharmacists  Pharmacist[]
+  createdAt    DateTime     @default(now())
 }
 
 model Pharmacist {
-  id         String          @id @default(cuid())
-  user       User            @relation(fields: [userId], references: [id])
-  userId     String          @unique
-  pharmacy   Pharmacy?       @relation(fields: [pharmacyId], references: [id])
-  pharmacyId String
+  id           String          @id @default(cuid())
+  user         User            @relation(fields: [userId], references: [id])
+  userId       String          @unique
+  pharmacy     Pharmacy?       @relation(fields: [pharmacyId], references: [id])
+  pharmacyId   String
   prescriptions  Prescription[]
-  orders     PharmacyOrder[]
-  createdAt  DateTime        @default(now())
+  orders       PharmacyOrder[]
+  createdAt    DateTime        @default(now())
 }
 
 model PharmacyOrder {
@@ -391,7 +373,7 @@ model PharmacyOrder {
   items          String
   totalCents     Int
   status         OrderStatus  @default(pending)
-  dispensedById  String   
+  dispensedById  String
   dispensedBy    Pharmacist?  @relation(fields: [dispensedById], references: [id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
@@ -415,32 +397,16 @@ model AirportCheck {
   @@index([patientId])
 }
 
-model LivestockRecord {
-  id             String   @id @default(cuid())
-  ownerName      String
-  consignmentId  String   @unique
-  species        String
-  quantity       Int
-  originFarm     String
-  vetId          String
-  vetName        String
-  vet            Vet?     @relation(fields: [vetId], references: [id])
-  healthCertUrl  String
-  issuedAt       DateTime @default(now())
-  expiresAt      DateTime @default(now())
-  createdAt      DateTime @default(now())
-}
-
 model BirthRecord {
-  id         String   @id @default(uuid())
-  patientId  String
+  id          String   @id @default(uuid())
+  patientId   String
   patientName String
-  patient    Patient? @relation(fields: [patientId], references: [id])
-  childName  String
-  dob        DateTime @default(now())
-  place      String
+  patient     Patient? @relation(fields: [patientId], references: [id])
+  childName   String
+  dob         DateTime @default(now())
+  place       String
   registeredBy String
-  createdAt  DateTime @default(now())
+  createdAt   DateTime @default(now())
 }
 
 model DeathRecord {
@@ -454,26 +420,12 @@ model DeathRecord {
   createdAt   DateTime @default(now())
 }
 
-model Vet {
-  id       String @id @default(uuid())
-  user     User   @relation(fields: [userId], references: [id])
-  userId   String @unique
-  hospital Hospital @relation(fields: [hospitalId], references: [id])
-  hospitalId String
-  hospitalName String
-  livestockRecords LivestockRecord[]
-  createdAt DateTime @default(now())
-
-}
-
-
-
 model Payment {
   id            String       @id @default(uuid())
-  amount      Float
+  amount        Float
   currency      String       @default("SOS")
   method        PaymentMethod @default(Stripe)
-  status        PaymentStatus @default(pending) 
+  status        PaymentStatus @default(pending)
   payerId       String       // User ID
   reference     String       // Stripe PaymentIntent ID
   metadata      String       // Additional info from Stripe (optional)
@@ -496,27 +448,27 @@ model Notification {
 
 model SyncQueue {
   id          String   @id @default(uuid())
-  source      String   
+  source      String
   payload     String
-  model       String   
-  action      String   
+  model       String
+  action      String
   processed   Boolean  @default(false)
   processedAt DateTime
   createdAt   DateTime @default(now())
-  terminalId  String?  
+  terminalId  String?
   terminal    Terminal? @relation(fields: [terminalId], references: [id])
 
   @@index([processed, createdAt])
 }
 
 model Media {
-  id         String   @id @default(uuid())
-  url        String
-  type       String
-  uploadedBy String
-  healthRecord HealthRecord? @relation("HealthRecordAttachments", fields: [healthRecordId], references: [id])
+  id             String   @id @default(uuid())
+  url            String
+  type           String
+  uploadedBy     String
+  healthRecord   HealthRecord? @relation("HealthRecordAttachments", fields: [healthRecordId], references: [id])
   healthRecordId String?
-  createdAt  DateTime @default(now())
+  createdAt      DateTime @default(now())
 }
 
 model AuditLog {
@@ -534,7 +486,7 @@ model Terminal {
   name        String
   type        TerminalType @default(kiosk)
   location    String?
-  lastSeenAt  DateTime @default(now())
+  lastSeenAt  DateTime     @default(now())
   offline     Boolean      @default(true)
   syncQueues  SyncQueue[]
   createdAt   DateTime     @default(now())
@@ -546,7 +498,7 @@ model ChatMessage {
   sender        User      @relation("SentMessages", fields: [senderId], references: [id])
   receiverId    String
   receiver      User      @relation("ReceivedMessages", fields: [receiverId], references: [id])
-  appointmentId String  
+  appointmentId String
   appointment   Appointment? @relation(fields: [appointmentId], references: [id])
   content       String
   read          Boolean   @default(false)
@@ -557,4 +509,3 @@ model ChatMessage {
   @@index([appointmentId])
   @@map("chat_messages")
 }
-
