@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   const { name, desc } = body
   if (!name) return new Response(JSON.stringify({ error: 'name required' }), { status: 400 })
   const exists = await prisma.permission.findUnique({ where: { name } })
-  if (exists) return new Response(JSON.stringify({ error: 'permission exists' }), { status: 409 })
+  if (exists) return new Response(JSON.stringify({ error: 'this permission already taken' }), { status: 409 })
   const created = await prisma.permission.create({ data: { name, desc: desc || '' } })
   return new Response(JSON.stringify({ permission: created }), { status: 201 })
 }

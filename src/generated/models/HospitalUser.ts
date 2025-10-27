@@ -29,9 +29,9 @@ export type HospitalUserMinAggregateOutputType = {
   phone: string | null
   email: string | null
   password: string | null
+  role: $Enums.hospitalRole | null
   hospitalId: string | null
   hospitalName: string | null
-  role: $Enums.hospitalRole | null
   createdAt: Date | null
 }
 
@@ -41,9 +41,9 @@ export type HospitalUserMaxAggregateOutputType = {
   phone: string | null
   email: string | null
   password: string | null
+  role: $Enums.hospitalRole | null
   hospitalId: string | null
   hospitalName: string | null
-  role: $Enums.hospitalRole | null
   createdAt: Date | null
 }
 
@@ -53,9 +53,9 @@ export type HospitalUserCountAggregateOutputType = {
   phone: number
   email: number
   password: number
+  role: number
   hospitalId: number
   hospitalName: number
-  role: number
   createdAt: number
   _all: number
 }
@@ -67,9 +67,9 @@ export type HospitalUserMinAggregateInputType = {
   phone?: true
   email?: true
   password?: true
+  role?: true
   hospitalId?: true
   hospitalName?: true
-  role?: true
   createdAt?: true
 }
 
@@ -79,9 +79,9 @@ export type HospitalUserMaxAggregateInputType = {
   phone?: true
   email?: true
   password?: true
+  role?: true
   hospitalId?: true
   hospitalName?: true
-  role?: true
   createdAt?: true
 }
 
@@ -91,9 +91,9 @@ export type HospitalUserCountAggregateInputType = {
   phone?: true
   email?: true
   password?: true
+  role?: true
   hospitalId?: true
   hospitalName?: true
-  role?: true
   createdAt?: true
   _all?: true
 }
@@ -176,9 +176,9 @@ export type HospitalUserGroupByOutputType = {
   phone: string
   email: string
   password: string
+  role: $Enums.hospitalRole
   hospitalId: string
   hospitalName: string
-  role: $Enums.hospitalRole
   createdAt: Date
   _count: HospitalUserCountAggregateOutputType | null
   _min: HospitalUserMinAggregateOutputType | null
@@ -209,9 +209,9 @@ export type HospitalUserWhereInput = {
   phone?: Prisma.StringFilter<"HospitalUser"> | string
   email?: Prisma.StringFilter<"HospitalUser"> | string
   password?: Prisma.StringFilter<"HospitalUser"> | string
+  role?: Prisma.EnumhospitalRoleFilter<"HospitalUser"> | $Enums.hospitalRole
   hospitalId?: Prisma.StringFilter<"HospitalUser"> | string
   hospitalName?: Prisma.StringFilter<"HospitalUser"> | string
-  role?: Prisma.EnumhospitalRoleFilter<"HospitalUser"> | $Enums.hospitalRole
   createdAt?: Prisma.DateTimeFilter<"HospitalUser"> | Date | string
   hospital?: Prisma.XOR<Prisma.HospitalScalarRelationFilter, Prisma.HospitalWhereInput>
 }
@@ -222,9 +222,9 @@ export type HospitalUserOrderByWithRelationInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   hospitalId?: Prisma.SortOrder
   hospitalName?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   hospital?: Prisma.HospitalOrderByWithRelationInput
 }
@@ -238,9 +238,9 @@ export type HospitalUserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"HospitalUser"> | string
   phone?: Prisma.StringFilter<"HospitalUser"> | string
   password?: Prisma.StringFilter<"HospitalUser"> | string
+  role?: Prisma.EnumhospitalRoleFilter<"HospitalUser"> | $Enums.hospitalRole
   hospitalId?: Prisma.StringFilter<"HospitalUser"> | string
   hospitalName?: Prisma.StringFilter<"HospitalUser"> | string
-  role?: Prisma.EnumhospitalRoleFilter<"HospitalUser"> | $Enums.hospitalRole
   createdAt?: Prisma.DateTimeFilter<"HospitalUser"> | Date | string
   hospital?: Prisma.XOR<Prisma.HospitalScalarRelationFilter, Prisma.HospitalWhereInput>
 }, "id" | "email">
@@ -251,9 +251,9 @@ export type HospitalUserOrderByWithAggregationInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   hospitalId?: Prisma.SortOrder
   hospitalName?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.HospitalUserCountOrderByAggregateInput
   _max?: Prisma.HospitalUserMaxOrderByAggregateInput
@@ -269,9 +269,9 @@ export type HospitalUserScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringWithAggregatesFilter<"HospitalUser"> | string
   email?: Prisma.StringWithAggregatesFilter<"HospitalUser"> | string
   password?: Prisma.StringWithAggregatesFilter<"HospitalUser"> | string
+  role?: Prisma.EnumhospitalRoleWithAggregatesFilter<"HospitalUser"> | $Enums.hospitalRole
   hospitalId?: Prisma.StringWithAggregatesFilter<"HospitalUser"> | string
   hospitalName?: Prisma.StringWithAggregatesFilter<"HospitalUser"> | string
-  role?: Prisma.EnumhospitalRoleWithAggregatesFilter<"HospitalUser"> | $Enums.hospitalRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HospitalUser"> | Date | string
 }
 
@@ -281,8 +281,8 @@ export type HospitalUserCreateInput = {
   phone: string
   email: string
   password: string
-  hospitalName: string
   role?: $Enums.hospitalRole
+  hospitalName: string
   createdAt?: Date | string
   hospital: Prisma.HospitalCreateNestedOneWithoutHospitalUsersInput
 }
@@ -293,9 +293,9 @@ export type HospitalUserUncheckedCreateInput = {
   phone: string
   email: string
   password: string
+  role?: $Enums.hospitalRole
   hospitalId: string
   hospitalName: string
-  role?: $Enums.hospitalRole
   createdAt?: Date | string
 }
 
@@ -305,8 +305,8 @@ export type HospitalUserUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
+  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hospital?: Prisma.HospitalUpdateOneRequiredWithoutHospitalUsersNestedInput
 }
@@ -317,9 +317,9 @@ export type HospitalUserUncheckedUpdateInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
   hospitalId?: Prisma.StringFieldUpdateOperationsInput | string
   hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -329,9 +329,9 @@ export type HospitalUserCreateManyInput = {
   phone: string
   email: string
   password: string
+  role?: $Enums.hospitalRole
   hospitalId: string
   hospitalName: string
-  role?: $Enums.hospitalRole
   createdAt?: Date | string
 }
 
@@ -341,8 +341,8 @@ export type HospitalUserUpdateManyMutationInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
+  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -352,9 +352,9 @@ export type HospitalUserUncheckedUpdateManyInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
   hospitalId?: Prisma.StringFieldUpdateOperationsInput | string
   hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -364,9 +364,9 @@ export type HospitalUserCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   hospitalId?: Prisma.SortOrder
   hospitalName?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -376,9 +376,9 @@ export type HospitalUserMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   hospitalId?: Prisma.SortOrder
   hospitalName?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -388,9 +388,9 @@ export type HospitalUserMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   hospitalId?: Prisma.SortOrder
   hospitalName?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -456,8 +456,8 @@ export type HospitalUserCreateWithoutHospitalInput = {
   phone: string
   email: string
   password: string
-  hospitalName: string
   role?: $Enums.hospitalRole
+  hospitalName: string
   createdAt?: Date | string
 }
 
@@ -467,8 +467,8 @@ export type HospitalUserUncheckedCreateWithoutHospitalInput = {
   phone: string
   email: string
   password: string
-  hospitalName: string
   role?: $Enums.hospitalRole
+  hospitalName: string
   createdAt?: Date | string
 }
 
@@ -507,9 +507,9 @@ export type HospitalUserScalarWhereInput = {
   phone?: Prisma.StringFilter<"HospitalUser"> | string
   email?: Prisma.StringFilter<"HospitalUser"> | string
   password?: Prisma.StringFilter<"HospitalUser"> | string
+  role?: Prisma.EnumhospitalRoleFilter<"HospitalUser"> | $Enums.hospitalRole
   hospitalId?: Prisma.StringFilter<"HospitalUser"> | string
   hospitalName?: Prisma.StringFilter<"HospitalUser"> | string
-  role?: Prisma.EnumhospitalRoleFilter<"HospitalUser"> | $Enums.hospitalRole
   createdAt?: Prisma.DateTimeFilter<"HospitalUser"> | Date | string
 }
 
@@ -519,8 +519,8 @@ export type HospitalUserCreateManyHospitalInput = {
   phone: string
   email: string
   password: string
-  hospitalName: string
   role?: $Enums.hospitalRole
+  hospitalName: string
   createdAt?: Date | string
 }
 
@@ -530,8 +530,8 @@ export type HospitalUserUpdateWithoutHospitalInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
+  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -541,8 +541,8 @@ export type HospitalUserUncheckedUpdateWithoutHospitalInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
+  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -552,8 +552,8 @@ export type HospitalUserUncheckedUpdateManyWithoutHospitalInput = {
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumhospitalRoleFieldUpdateOperationsInput | $Enums.hospitalRole
+  hospitalName?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -565,9 +565,9 @@ export type HospitalUserSelect<ExtArgs extends runtime.Types.Extensions.Internal
   phone?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
   hospitalId?: boolean
   hospitalName?: boolean
-  role?: boolean
   createdAt?: boolean
   hospital?: boolean | Prisma.HospitalDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["hospitalUser"]>
@@ -578,9 +578,9 @@ export type HospitalUserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   phone?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
   hospitalId?: boolean
   hospitalName?: boolean
-  role?: boolean
   createdAt?: boolean
   hospital?: boolean | Prisma.HospitalDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["hospitalUser"]>
@@ -591,9 +591,9 @@ export type HospitalUserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   phone?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
   hospitalId?: boolean
   hospitalName?: boolean
-  role?: boolean
   createdAt?: boolean
   hospital?: boolean | Prisma.HospitalDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["hospitalUser"]>
@@ -604,13 +604,13 @@ export type HospitalUserSelectScalar = {
   phone?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
   hospitalId?: boolean
   hospitalName?: boolean
-  role?: boolean
   createdAt?: boolean
 }
 
-export type HospitalUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "email" | "password" | "hospitalId" | "hospitalName" | "role" | "createdAt", ExtArgs["result"]["hospitalUser"]>
+export type HospitalUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "email" | "password" | "role" | "hospitalId" | "hospitalName" | "createdAt", ExtArgs["result"]["hospitalUser"]>
 export type HospitalUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   hospital?: boolean | Prisma.HospitalDefaultArgs<ExtArgs>
 }
@@ -632,9 +632,9 @@ export type $HospitalUserPayload<ExtArgs extends runtime.Types.Extensions.Intern
     phone: string
     email: string
     password: string
+    role: $Enums.hospitalRole
     hospitalId: string
     hospitalName: string
-    role: $Enums.hospitalRole
     createdAt: Date
   }, ExtArgs["result"]["hospitalUser"]>
   composites: {}
@@ -1065,9 +1065,9 @@ export interface HospitalUserFieldRefs {
   readonly phone: Prisma.FieldRef<"HospitalUser", 'String'>
   readonly email: Prisma.FieldRef<"HospitalUser", 'String'>
   readonly password: Prisma.FieldRef<"HospitalUser", 'String'>
+  readonly role: Prisma.FieldRef<"HospitalUser", 'hospitalRole'>
   readonly hospitalId: Prisma.FieldRef<"HospitalUser", 'String'>
   readonly hospitalName: Prisma.FieldRef<"HospitalUser", 'String'>
-  readonly role: Prisma.FieldRef<"HospitalUser", 'hospitalRole'>
   readonly createdAt: Prisma.FieldRef<"HospitalUser", 'DateTime'>
 }
     

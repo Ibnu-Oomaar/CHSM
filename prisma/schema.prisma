@@ -71,6 +71,11 @@ enum hospitalRole {
   pharmacist
 }
 
+enum resultCheck {
+  verify
+  failed
+}
+
 /// ---------- MODELS ----------
 
 model RefreshToken {
@@ -141,10 +146,10 @@ model HospitalUser {
   phone        String
   email        String       @unique
   password     String
-  hospital     Hospital     @relation(fields: [hospitalId], references: [id])
-  hospitalId   String
-  hospitalName String
   role         hospitalRole @default(patient)
+  hospitalId  String
+  hospitalName String
+  hospital     Hospital     @relation(fields: [hospitalId], references: [id])
   createdAt    DateTime     @default(now())
 }
 
@@ -156,15 +161,21 @@ model Hospital {
   address       String
   phone         String
   email         String       @unique
+  password      String 
+  licenseNo     String       @unique
+  licenseTakeDate   DateTime
+  licenseExpiryDate DateTime
   departments   Department[]
   doctors       Doctor[]
+  hospitalUsers HospitalUser[]
   userId        String
   user          User         @relation(fields: [userId], references: [id])
   pharmacies    Pharmacy[]
-  hospitalUsers HospitalUser[]
   appointments  Appointment[]
   labResults    LabResult[]
   prescriptions Prescription[]
+  isActive     Boolean      @default(true)
+  isVerified   Boolean      @default(false)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 }
@@ -199,6 +210,10 @@ model Doctor {
   departmentId   String
   departmentName String
   specialization String
+  nationalId     String      @unique
+  licenseNo     String       @unique
+  licenseTakeDate   DateTime
+  licenseExpiryDate DateTime             
   bio            String
   appointments   Appointment[]
   prescriptions  Prescription[]
@@ -388,7 +403,7 @@ model AirportCheck {
   patientId   String
   patientName String
   patient     Patient? @relation(fields: [patientId], references: [id])
-  result      String
+  result      resultCheck
   checkedAt   DateTime @default(now())
   source      String
   offline     Boolean  @default(false)

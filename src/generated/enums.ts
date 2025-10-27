@@ -95,3 +95,11 @@ export const hospitalRole = {
 } as const
 
 export type hospitalRole = (typeof hospitalRole)[keyof typeof hospitalRole]
+
+
+export const resultCheck = {
+  verify: 'verify',
+  failed: 'failed'
+} as const
+
+export type resultCheck = (typeof resultCheck)[keyof typeof resultCheck]

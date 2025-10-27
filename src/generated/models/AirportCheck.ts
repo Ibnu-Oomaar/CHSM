@@ -28,7 +28,7 @@ export type AirportCheckMinAggregateOutputType = {
   checkedById: string | null
   patientId: string | null
   patientName: string | null
-  result: string | null
+  result: $Enums.resultCheck | null
   checkedAt: Date | null
   source: string | null
   offline: boolean | null
@@ -39,7 +39,7 @@ export type AirportCheckMaxAggregateOutputType = {
   checkedById: string | null
   patientId: string | null
   patientName: string | null
-  result: string | null
+  result: $Enums.resultCheck | null
   checkedAt: Date | null
   source: string | null
   offline: boolean | null
@@ -169,7 +169,7 @@ export type AirportCheckGroupByOutputType = {
   checkedById: string
   patientId: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt: Date
   source: string
   offline: boolean
@@ -201,7 +201,7 @@ export type AirportCheckWhereInput = {
   checkedById?: Prisma.StringFilter<"AirportCheck"> | string
   patientId?: Prisma.StringFilter<"AirportCheck"> | string
   patientName?: Prisma.StringFilter<"AirportCheck"> | string
-  result?: Prisma.StringFilter<"AirportCheck"> | string
+  result?: Prisma.EnumresultCheckFilter<"AirportCheck"> | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFilter<"AirportCheck"> | Date | string
   source?: Prisma.StringFilter<"AirportCheck"> | string
   offline?: Prisma.BoolFilter<"AirportCheck"> | boolean
@@ -230,7 +230,7 @@ export type AirportCheckWhereUniqueInput = Prisma.AtLeast<{
   checkedById?: Prisma.StringFilter<"AirportCheck"> | string
   patientId?: Prisma.StringFilter<"AirportCheck"> | string
   patientName?: Prisma.StringFilter<"AirportCheck"> | string
-  result?: Prisma.StringFilter<"AirportCheck"> | string
+  result?: Prisma.EnumresultCheckFilter<"AirportCheck"> | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFilter<"AirportCheck"> | Date | string
   source?: Prisma.StringFilter<"AirportCheck"> | string
   offline?: Prisma.BoolFilter<"AirportCheck"> | boolean
@@ -260,7 +260,7 @@ export type AirportCheckScalarWhereWithAggregatesInput = {
   checkedById?: Prisma.StringWithAggregatesFilter<"AirportCheck"> | string
   patientId?: Prisma.StringWithAggregatesFilter<"AirportCheck"> | string
   patientName?: Prisma.StringWithAggregatesFilter<"AirportCheck"> | string
-  result?: Prisma.StringWithAggregatesFilter<"AirportCheck"> | string
+  result?: Prisma.EnumresultCheckWithAggregatesFilter<"AirportCheck"> | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeWithAggregatesFilter<"AirportCheck"> | Date | string
   source?: Prisma.StringWithAggregatesFilter<"AirportCheck"> | string
   offline?: Prisma.BoolWithAggregatesFilter<"AirportCheck"> | boolean
@@ -269,7 +269,7 @@ export type AirportCheckScalarWhereWithAggregatesInput = {
 export type AirportCheckCreateInput = {
   id?: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -282,7 +282,7 @@ export type AirportCheckUncheckedCreateInput = {
   checkedById: string
   patientId: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -291,7 +291,7 @@ export type AirportCheckUncheckedCreateInput = {
 export type AirportCheckUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -304,7 +304,7 @@ export type AirportCheckUncheckedUpdateInput = {
   checkedById?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -315,7 +315,7 @@ export type AirportCheckCreateManyInput = {
   checkedById: string
   patientId: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -324,7 +324,7 @@ export type AirportCheckCreateManyInput = {
 export type AirportCheckUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -335,7 +335,7 @@ export type AirportCheckUncheckedUpdateManyInput = {
   checkedById?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -468,10 +468,14 @@ export type AirportCheckUncheckedUpdateManyWithoutPatientNestedInput = {
   deleteMany?: Prisma.AirportCheckScalarWhereInput | Prisma.AirportCheckScalarWhereInput[]
 }
 
+export type EnumresultCheckFieldUpdateOperationsInput = {
+  set?: $Enums.resultCheck
+}
+
 export type AirportCheckCreateWithoutCheckedByInput = {
   id?: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -482,7 +486,7 @@ export type AirportCheckUncheckedCreateWithoutCheckedByInput = {
   id?: string
   patientId: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -522,7 +526,7 @@ export type AirportCheckScalarWhereInput = {
   checkedById?: Prisma.StringFilter<"AirportCheck"> | string
   patientId?: Prisma.StringFilter<"AirportCheck"> | string
   patientName?: Prisma.StringFilter<"AirportCheck"> | string
-  result?: Prisma.StringFilter<"AirportCheck"> | string
+  result?: Prisma.EnumresultCheckFilter<"AirportCheck"> | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFilter<"AirportCheck"> | Date | string
   source?: Prisma.StringFilter<"AirportCheck"> | string
   offline?: Prisma.BoolFilter<"AirportCheck"> | boolean
@@ -531,7 +535,7 @@ export type AirportCheckScalarWhereInput = {
 export type AirportCheckCreateWithoutPatientInput = {
   id?: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -542,7 +546,7 @@ export type AirportCheckUncheckedCreateWithoutPatientInput = {
   id?: string
   checkedById: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -578,7 +582,7 @@ export type AirportCheckCreateManyCheckedByInput = {
   id?: string
   patientId: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -587,7 +591,7 @@ export type AirportCheckCreateManyCheckedByInput = {
 export type AirportCheckUpdateWithoutCheckedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -598,7 +602,7 @@ export type AirportCheckUncheckedUpdateWithoutCheckedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -608,7 +612,7 @@ export type AirportCheckUncheckedUpdateManyWithoutCheckedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientId?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -618,7 +622,7 @@ export type AirportCheckCreateManyPatientInput = {
   id?: string
   checkedById: string
   patientName: string
-  result: string
+  result: $Enums.resultCheck
   checkedAt?: Date | string
   source: string
   offline?: boolean
@@ -627,7 +631,7 @@ export type AirportCheckCreateManyPatientInput = {
 export type AirportCheckUpdateWithoutPatientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -638,7 +642,7 @@ export type AirportCheckUncheckedUpdateWithoutPatientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   checkedById?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -648,7 +652,7 @@ export type AirportCheckUncheckedUpdateManyWithoutPatientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   checkedById?: Prisma.StringFieldUpdateOperationsInput | string
   patientName?: Prisma.StringFieldUpdateOperationsInput | string
-  result?: Prisma.StringFieldUpdateOperationsInput | string
+  result?: Prisma.EnumresultCheckFieldUpdateOperationsInput | $Enums.resultCheck
   checkedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
   offline?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -731,7 +735,7 @@ export type $AirportCheckPayload<ExtArgs extends runtime.Types.Extensions.Intern
     checkedById: string
     patientId: string
     patientName: string
-    result: string
+    result: $Enums.resultCheck
     checkedAt: Date
     source: string
     offline: boolean
@@ -1164,7 +1168,7 @@ export interface AirportCheckFieldRefs {
   readonly checkedById: Prisma.FieldRef<"AirportCheck", 'String'>
   readonly patientId: Prisma.FieldRef<"AirportCheck", 'String'>
   readonly patientName: Prisma.FieldRef<"AirportCheck", 'String'>
-  readonly result: Prisma.FieldRef<"AirportCheck", 'String'>
+  readonly result: Prisma.FieldRef<"AirportCheck", 'resultCheck'>
   readonly checkedAt: Prisma.FieldRef<"AirportCheck", 'DateTime'>
   readonly source: Prisma.FieldRef<"AirportCheck", 'String'>
   readonly offline: Prisma.FieldRef<"AirportCheck", 'Boolean'>

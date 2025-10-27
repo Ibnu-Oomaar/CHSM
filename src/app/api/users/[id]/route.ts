@@ -25,7 +25,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
   const data: any = {}
   if (body.name) data.name = body.name
-  if (body.email) data.email = body.email
+  if (body.email) data.email = body.email.toLowerCase()
   if (body.phone) data.phone = body.phone
   if (body.password) data.password = await hashPassword(body.password)
   if (body.role && requireRole(current, ['superAdmin'])) data.role = body.role

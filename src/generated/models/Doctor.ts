@@ -30,6 +30,10 @@ export type DoctorMinAggregateOutputType = {
   departmentId: string | null
   departmentName: string | null
   specialization: string | null
+  nationalId: string | null
+  licenseNo: string | null
+  licenseTakeDate: Date | null
+  licenseExpiryDate: Date | null
   bio: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -42,6 +46,10 @@ export type DoctorMaxAggregateOutputType = {
   departmentId: string | null
   departmentName: string | null
   specialization: string | null
+  nationalId: string | null
+  licenseNo: string | null
+  licenseTakeDate: Date | null
+  licenseExpiryDate: Date | null
   bio: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,6 +62,10 @@ export type DoctorCountAggregateOutputType = {
   departmentId: number
   departmentName: number
   specialization: number
+  nationalId: number
+  licenseNo: number
+  licenseTakeDate: number
+  licenseExpiryDate: number
   bio: number
   createdAt: number
   updatedAt: number
@@ -68,6 +80,10 @@ export type DoctorMinAggregateInputType = {
   departmentId?: true
   departmentName?: true
   specialization?: true
+  nationalId?: true
+  licenseNo?: true
+  licenseTakeDate?: true
+  licenseExpiryDate?: true
   bio?: true
   createdAt?: true
   updatedAt?: true
@@ -80,6 +96,10 @@ export type DoctorMaxAggregateInputType = {
   departmentId?: true
   departmentName?: true
   specialization?: true
+  nationalId?: true
+  licenseNo?: true
+  licenseTakeDate?: true
+  licenseExpiryDate?: true
   bio?: true
   createdAt?: true
   updatedAt?: true
@@ -92,6 +112,10 @@ export type DoctorCountAggregateInputType = {
   departmentId?: true
   departmentName?: true
   specialization?: true
+  nationalId?: true
+  licenseNo?: true
+  licenseTakeDate?: true
+  licenseExpiryDate?: true
   bio?: true
   createdAt?: true
   updatedAt?: true
@@ -177,6 +201,10 @@ export type DoctorGroupByOutputType = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date
+  licenseExpiryDate: Date
   bio: string
   createdAt: Date
   updatedAt: Date
@@ -210,6 +238,10 @@ export type DoctorWhereInput = {
   departmentId?: Prisma.StringFilter<"Doctor"> | string
   departmentName?: Prisma.StringFilter<"Doctor"> | string
   specialization?: Prisma.StringFilter<"Doctor"> | string
+  nationalId?: Prisma.StringFilter<"Doctor"> | string
+  licenseNo?: Prisma.StringFilter<"Doctor"> | string
+  licenseTakeDate?: Prisma.DateTimeFilter<"Doctor"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFilter<"Doctor"> | Date | string
   bio?: Prisma.StringFilter<"Doctor"> | string
   createdAt?: Prisma.DateTimeFilter<"Doctor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Doctor"> | Date | string
@@ -228,6 +260,10 @@ export type DoctorOrderByWithRelationInput = {
   departmentId?: Prisma.SortOrder
   departmentName?: Prisma.SortOrder
   specialization?: Prisma.SortOrder
+  nationalId?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -242,6 +278,8 @@ export type DoctorOrderByWithRelationInput = {
 export type DoctorWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   userId?: string
+  nationalId?: string
+  licenseNo?: string
   AND?: Prisma.DoctorWhereInput | Prisma.DoctorWhereInput[]
   OR?: Prisma.DoctorWhereInput[]
   NOT?: Prisma.DoctorWhereInput | Prisma.DoctorWhereInput[]
@@ -249,6 +287,8 @@ export type DoctorWhereUniqueInput = Prisma.AtLeast<{
   departmentId?: Prisma.StringFilter<"Doctor"> | string
   departmentName?: Prisma.StringFilter<"Doctor"> | string
   specialization?: Prisma.StringFilter<"Doctor"> | string
+  licenseTakeDate?: Prisma.DateTimeFilter<"Doctor"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFilter<"Doctor"> | Date | string
   bio?: Prisma.StringFilter<"Doctor"> | string
   createdAt?: Prisma.DateTimeFilter<"Doctor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Doctor"> | Date | string
@@ -258,7 +298,7 @@ export type DoctorWhereUniqueInput = Prisma.AtLeast<{
   appointments?: Prisma.AppointmentListRelationFilter
   prescriptions?: Prisma.PrescriptionListRelationFilter
   labResults?: Prisma.LabResultListRelationFilter
-}, "id" | "userId">
+}, "id" | "userId" | "nationalId" | "licenseNo">
 
 export type DoctorOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -267,6 +307,10 @@ export type DoctorOrderByWithAggregationInput = {
   departmentId?: Prisma.SortOrder
   departmentName?: Prisma.SortOrder
   specialization?: Prisma.SortOrder
+  nationalId?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -285,6 +329,10 @@ export type DoctorScalarWhereWithAggregatesInput = {
   departmentId?: Prisma.StringWithAggregatesFilter<"Doctor"> | string
   departmentName?: Prisma.StringWithAggregatesFilter<"Doctor"> | string
   specialization?: Prisma.StringWithAggregatesFilter<"Doctor"> | string
+  nationalId?: Prisma.StringWithAggregatesFilter<"Doctor"> | string
+  licenseNo?: Prisma.StringWithAggregatesFilter<"Doctor"> | string
+  licenseTakeDate?: Prisma.DateTimeWithAggregatesFilter<"Doctor"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeWithAggregatesFilter<"Doctor"> | Date | string
   bio?: Prisma.StringWithAggregatesFilter<"Doctor"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Doctor"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Doctor"> | Date | string
@@ -294,6 +342,10 @@ export type DoctorCreateInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -312,6 +364,10 @@ export type DoctorUncheckedCreateInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -324,6 +380,10 @@ export type DoctorUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -342,6 +402,10 @@ export type DoctorUncheckedUpdateInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -357,6 +421,10 @@ export type DoctorCreateManyInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -366,6 +434,10 @@ export type DoctorUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -378,6 +450,10 @@ export type DoctorUncheckedUpdateManyInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -405,6 +481,10 @@ export type DoctorCountOrderByAggregateInput = {
   departmentId?: Prisma.SortOrder
   departmentName?: Prisma.SortOrder
   specialization?: Prisma.SortOrder
+  nationalId?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -417,6 +497,10 @@ export type DoctorMaxOrderByAggregateInput = {
   departmentId?: Prisma.SortOrder
   departmentName?: Prisma.SortOrder
   specialization?: Prisma.SortOrder
+  nationalId?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -429,6 +513,10 @@ export type DoctorMinOrderByAggregateInput = {
   departmentId?: Prisma.SortOrder
   departmentName?: Prisma.SortOrder
   specialization?: Prisma.SortOrder
+  nationalId?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -605,6 +693,10 @@ export type DoctorCreateWithoutUserInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -621,6 +713,10 @@ export type DoctorUncheckedCreateWithoutUserInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -649,6 +745,10 @@ export type DoctorUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -665,6 +765,10 @@ export type DoctorUncheckedUpdateWithoutUserInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -677,6 +781,10 @@ export type DoctorCreateWithoutHospitalInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -693,6 +801,10 @@ export type DoctorUncheckedCreateWithoutHospitalInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -737,6 +849,10 @@ export type DoctorScalarWhereInput = {
   departmentId?: Prisma.StringFilter<"Doctor"> | string
   departmentName?: Prisma.StringFilter<"Doctor"> | string
   specialization?: Prisma.StringFilter<"Doctor"> | string
+  nationalId?: Prisma.StringFilter<"Doctor"> | string
+  licenseNo?: Prisma.StringFilter<"Doctor"> | string
+  licenseTakeDate?: Prisma.DateTimeFilter<"Doctor"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFilter<"Doctor"> | Date | string
   bio?: Prisma.StringFilter<"Doctor"> | string
   createdAt?: Prisma.DateTimeFilter<"Doctor"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Doctor"> | Date | string
@@ -746,6 +862,10 @@ export type DoctorCreateWithoutDepartmentInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -762,6 +882,10 @@ export type DoctorUncheckedCreateWithoutDepartmentInput = {
   hospitalId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -800,6 +924,10 @@ export type DoctorCreateWithoutAppointmentsInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -817,6 +945,10 @@ export type DoctorUncheckedCreateWithoutAppointmentsInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -844,6 +976,10 @@ export type DoctorUpdateWithoutAppointmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -861,6 +997,10 @@ export type DoctorUncheckedUpdateWithoutAppointmentsInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -872,6 +1012,10 @@ export type DoctorCreateWithoutLabResultsInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -889,6 +1033,10 @@ export type DoctorUncheckedCreateWithoutLabResultsInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -916,6 +1064,10 @@ export type DoctorUpdateWithoutLabResultsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -933,6 +1085,10 @@ export type DoctorUncheckedUpdateWithoutLabResultsInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -944,6 +1100,10 @@ export type DoctorCreateWithoutPrescriptionsInput = {
   id?: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -961,6 +1121,10 @@ export type DoctorUncheckedCreateWithoutPrescriptionsInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -988,6 +1152,10 @@ export type DoctorUpdateWithoutPrescriptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1005,6 +1173,10 @@ export type DoctorUncheckedUpdateWithoutPrescriptionsInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1018,6 +1190,10 @@ export type DoctorCreateManyHospitalInput = {
   departmentId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1027,6 +1203,10 @@ export type DoctorUpdateWithoutHospitalInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1043,6 +1223,10 @@ export type DoctorUncheckedUpdateWithoutHospitalInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1057,6 +1241,10 @@ export type DoctorUncheckedUpdateManyWithoutHospitalInput = {
   departmentId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1068,6 +1256,10 @@ export type DoctorCreateManyDepartmentInput = {
   hospitalId: string
   departmentName: string
   specialization: string
+  nationalId: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   bio: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1077,6 +1269,10 @@ export type DoctorUpdateWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1093,6 +1289,10 @@ export type DoctorUncheckedUpdateWithoutDepartmentInput = {
   hospitalId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1107,6 +1307,10 @@ export type DoctorUncheckedUpdateManyWithoutDepartmentInput = {
   hospitalId?: Prisma.StringFieldUpdateOperationsInput | string
   departmentName?: Prisma.StringFieldUpdateOperationsInput | string
   specialization?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bio?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1168,6 +1372,10 @@ export type DoctorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   departmentId?: boolean
   departmentName?: boolean
   specialization?: boolean
+  nationalId?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   bio?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1187,6 +1395,10 @@ export type DoctorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   departmentId?: boolean
   departmentName?: boolean
   specialization?: boolean
+  nationalId?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   bio?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1202,6 +1414,10 @@ export type DoctorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   departmentId?: boolean
   departmentName?: boolean
   specialization?: boolean
+  nationalId?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   bio?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1217,12 +1433,16 @@ export type DoctorSelectScalar = {
   departmentId?: boolean
   departmentName?: boolean
   specialization?: boolean
+  nationalId?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   bio?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DoctorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "hospitalId" | "departmentId" | "departmentName" | "specialization" | "bio" | "createdAt" | "updatedAt", ExtArgs["result"]["doctor"]>
+export type DoctorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "hospitalId" | "departmentId" | "departmentName" | "specialization" | "nationalId" | "licenseNo" | "licenseTakeDate" | "licenseExpiryDate" | "bio" | "createdAt" | "updatedAt", ExtArgs["result"]["doctor"]>
 export type DoctorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hospital?: boolean | Prisma.HospitalDefaultArgs<ExtArgs>
@@ -1260,6 +1480,10 @@ export type $DoctorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     departmentId: string
     departmentName: string
     specialization: string
+    nationalId: string
+    licenseNo: string
+    licenseTakeDate: Date
+    licenseExpiryDate: Date
     bio: string
     createdAt: Date
     updatedAt: Date
@@ -1698,6 +1922,10 @@ export interface DoctorFieldRefs {
   readonly departmentId: Prisma.FieldRef<"Doctor", 'String'>
   readonly departmentName: Prisma.FieldRef<"Doctor", 'String'>
   readonly specialization: Prisma.FieldRef<"Doctor", 'String'>
+  readonly nationalId: Prisma.FieldRef<"Doctor", 'String'>
+  readonly licenseNo: Prisma.FieldRef<"Doctor", 'String'>
+  readonly licenseTakeDate: Prisma.FieldRef<"Doctor", 'DateTime'>
+  readonly licenseExpiryDate: Prisma.FieldRef<"Doctor", 'DateTime'>
   readonly bio: Prisma.FieldRef<"Doctor", 'String'>
   readonly createdAt: Prisma.FieldRef<"Doctor", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Doctor", 'DateTime'>

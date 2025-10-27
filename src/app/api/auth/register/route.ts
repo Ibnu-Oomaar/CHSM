@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ error: 'creating superAdmin is disabled' }), { status: 403 })
   }
 
-  const exists = await prisma.user.findUnique({ where: { email } })
+  const exists = await prisma.user.findUnique({ where: { email: email.toLowerCase() } })
   if (exists) return new Response(JSON.stringify({ error: 'email already exists' }), { status: 409 })
 
   const hashed = await hashPassword(password)

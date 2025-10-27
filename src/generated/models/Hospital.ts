@@ -31,7 +31,13 @@ export type HospitalMinAggregateOutputType = {
   address: string | null
   phone: string | null
   email: string | null
+  password: string | null
+  licenseNo: string | null
+  licenseTakeDate: Date | null
+  licenseExpiryDate: Date | null
   userId: string | null
+  isActive: boolean | null
+  isVerified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,7 +50,13 @@ export type HospitalMaxAggregateOutputType = {
   address: string | null
   phone: string | null
   email: string | null
+  password: string | null
+  licenseNo: string | null
+  licenseTakeDate: Date | null
+  licenseExpiryDate: Date | null
   userId: string | null
+  isActive: boolean | null
+  isVerified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,7 +69,13 @@ export type HospitalCountAggregateOutputType = {
   address: number
   phone: number
   email: number
+  password: number
+  licenseNo: number
+  licenseTakeDate: number
+  licenseExpiryDate: number
   userId: number
+  isActive: number
+  isVerified: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -72,7 +90,13 @@ export type HospitalMinAggregateInputType = {
   address?: true
   phone?: true
   email?: true
+  password?: true
+  licenseNo?: true
+  licenseTakeDate?: true
+  licenseExpiryDate?: true
   userId?: true
+  isActive?: true
+  isVerified?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -85,7 +109,13 @@ export type HospitalMaxAggregateInputType = {
   address?: true
   phone?: true
   email?: true
+  password?: true
+  licenseNo?: true
+  licenseTakeDate?: true
+  licenseExpiryDate?: true
   userId?: true
+  isActive?: true
+  isVerified?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -98,7 +128,13 @@ export type HospitalCountAggregateInputType = {
   address?: true
   phone?: true
   email?: true
+  password?: true
+  licenseNo?: true
+  licenseTakeDate?: true
+  licenseExpiryDate?: true
   userId?: true
+  isActive?: true
+  isVerified?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -184,7 +220,13 @@ export type HospitalGroupByOutputType = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date
+  licenseExpiryDate: Date
   userId: string
+  isActive: boolean
+  isVerified: boolean
   createdAt: Date
   updatedAt: Date
   _count: HospitalCountAggregateOutputType | null
@@ -218,14 +260,20 @@ export type HospitalWhereInput = {
   address?: Prisma.StringFilter<"Hospital"> | string
   phone?: Prisma.StringFilter<"Hospital"> | string
   email?: Prisma.StringFilter<"Hospital"> | string
+  password?: Prisma.StringFilter<"Hospital"> | string
+  licenseNo?: Prisma.StringFilter<"Hospital"> | string
+  licenseTakeDate?: Prisma.DateTimeFilter<"Hospital"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   userId?: Prisma.StringFilter<"Hospital"> | string
+  isActive?: Prisma.BoolFilter<"Hospital"> | boolean
+  isVerified?: Prisma.BoolFilter<"Hospital"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   departments?: Prisma.DepartmentListRelationFilter
   doctors?: Prisma.DoctorListRelationFilter
+  hospitalUsers?: Prisma.HospitalUserListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   pharmacies?: Prisma.PharmacyListRelationFilter
-  hospitalUsers?: Prisma.HospitalUserListRelationFilter
   appointments?: Prisma.AppointmentListRelationFilter
   labResults?: Prisma.LabResultListRelationFilter
   prescriptions?: Prisma.PrescriptionListRelationFilter
@@ -239,14 +287,20 @@ export type HospitalOrderByWithRelationInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   departments?: Prisma.DepartmentOrderByRelationAggregateInput
   doctors?: Prisma.DoctorOrderByRelationAggregateInput
+  hospitalUsers?: Prisma.HospitalUserOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
   pharmacies?: Prisma.PharmacyOrderByRelationAggregateInput
-  hospitalUsers?: Prisma.HospitalUserOrderByRelationAggregateInput
   appointments?: Prisma.AppointmentOrderByRelationAggregateInput
   labResults?: Prisma.LabResultOrderByRelationAggregateInput
   prescriptions?: Prisma.PrescriptionOrderByRelationAggregateInput
@@ -257,24 +311,30 @@ export type HospitalWhereUniqueInput = Prisma.AtLeast<{
   name?: string
   code?: string
   email?: string
+  licenseNo?: string
   AND?: Prisma.HospitalWhereInput | Prisma.HospitalWhereInput[]
   OR?: Prisma.HospitalWhereInput[]
   NOT?: Prisma.HospitalWhereInput | Prisma.HospitalWhereInput[]
   description?: Prisma.StringFilter<"Hospital"> | string
   address?: Prisma.StringFilter<"Hospital"> | string
   phone?: Prisma.StringFilter<"Hospital"> | string
+  password?: Prisma.StringFilter<"Hospital"> | string
+  licenseTakeDate?: Prisma.DateTimeFilter<"Hospital"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   userId?: Prisma.StringFilter<"Hospital"> | string
+  isActive?: Prisma.BoolFilter<"Hospital"> | boolean
+  isVerified?: Prisma.BoolFilter<"Hospital"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   departments?: Prisma.DepartmentListRelationFilter
   doctors?: Prisma.DoctorListRelationFilter
+  hospitalUsers?: Prisma.HospitalUserListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   pharmacies?: Prisma.PharmacyListRelationFilter
-  hospitalUsers?: Prisma.HospitalUserListRelationFilter
   appointments?: Prisma.AppointmentListRelationFilter
   labResults?: Prisma.LabResultListRelationFilter
   prescriptions?: Prisma.PrescriptionListRelationFilter
-}, "id" | "name" | "code" | "email">
+}, "id" | "name" | "code" | "email" | "licenseNo">
 
 export type HospitalOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -284,7 +344,13 @@ export type HospitalOrderByWithAggregationInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.HospitalCountOrderByAggregateInput
@@ -303,7 +369,13 @@ export type HospitalScalarWhereWithAggregatesInput = {
   address?: Prisma.StringWithAggregatesFilter<"Hospital"> | string
   phone?: Prisma.StringWithAggregatesFilter<"Hospital"> | string
   email?: Prisma.StringWithAggregatesFilter<"Hospital"> | string
+  password?: Prisma.StringWithAggregatesFilter<"Hospital"> | string
+  licenseNo?: Prisma.StringWithAggregatesFilter<"Hospital"> | string
+  licenseTakeDate?: Prisma.DateTimeWithAggregatesFilter<"Hospital"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeWithAggregatesFilter<"Hospital"> | Date | string
   userId?: Prisma.StringWithAggregatesFilter<"Hospital"> | string
+  isActive?: Prisma.BoolWithAggregatesFilter<"Hospital"> | boolean
+  isVerified?: Prisma.BoolWithAggregatesFilter<"Hospital"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Hospital"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Hospital"> | Date | string
 }
@@ -316,13 +388,19 @@ export type HospitalCreateInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
+  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
-  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
@@ -336,13 +414,19 @@ export type HospitalUncheckedCreateInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultUncheckedCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutHospitalInput
@@ -356,13 +440,19 @@ export type HospitalUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
+  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
-  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
@@ -376,13 +466,19 @@ export type HospitalUncheckedUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUncheckedUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutHospitalNestedInput
@@ -396,7 +492,13 @@ export type HospitalCreateManyInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -409,6 +511,12 @@ export type HospitalUpdateManyMutationInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -421,7 +529,13 @@ export type HospitalUncheckedUpdateManyInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -449,7 +563,13 @@ export type HospitalCountOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -462,7 +582,13 @@ export type HospitalMaxOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -475,7 +601,13 @@ export type HospitalMinOrderByAggregateInput = {
   address?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  licenseNo?: Prisma.SortOrder
+  licenseTakeDate?: Prisma.SortOrder
+  licenseExpiryDate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -635,12 +767,18 @@ export type HospitalCreateWithoutUserInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
@@ -654,12 +792,18 @@ export type HospitalUncheckedCreateWithoutUserInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultUncheckedCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutHospitalInput
@@ -702,7 +846,13 @@ export type HospitalScalarWhereInput = {
   address?: Prisma.StringFilter<"Hospital"> | string
   phone?: Prisma.StringFilter<"Hospital"> | string
   email?: Prisma.StringFilter<"Hospital"> | string
+  password?: Prisma.StringFilter<"Hospital"> | string
+  licenseNo?: Prisma.StringFilter<"Hospital"> | string
+  licenseTakeDate?: Prisma.DateTimeFilter<"Hospital"> | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   userId?: Prisma.StringFilter<"Hospital"> | string
+  isActive?: Prisma.BoolFilter<"Hospital"> | boolean
+  isVerified?: Prisma.BoolFilter<"Hospital"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Hospital"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Hospital"> | Date | string
 }
@@ -715,6 +865,12 @@ export type HospitalCreateWithoutHospitalUsersInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
@@ -734,7 +890,13 @@ export type HospitalUncheckedCreateWithoutHospitalUsersInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
@@ -769,6 +931,12 @@ export type HospitalUpdateWithoutHospitalUsersInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
@@ -788,7 +956,13 @@ export type HospitalUncheckedUpdateWithoutHospitalUsersInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
@@ -807,12 +981,18 @@ export type HospitalCreateWithoutDepartmentsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
+  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
-  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
@@ -826,12 +1006,18 @@ export type HospitalUncheckedCreateWithoutDepartmentsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultUncheckedCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutHospitalInput
@@ -861,12 +1047,18 @@ export type HospitalUpdateWithoutDepartmentsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
+  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
-  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
@@ -880,12 +1072,18 @@ export type HospitalUncheckedUpdateWithoutDepartmentsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   doctors?: Prisma.DoctorUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUncheckedUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutHospitalNestedInput
@@ -899,12 +1097,18 @@ export type HospitalCreateWithoutDoctorsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
+  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
-  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
@@ -918,12 +1122,18 @@ export type HospitalUncheckedCreateWithoutDoctorsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultUncheckedCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutHospitalInput
@@ -953,12 +1163,18 @@ export type HospitalUpdateWithoutDoctorsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
+  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
-  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
@@ -972,12 +1188,18 @@ export type HospitalUncheckedUpdateWithoutDoctorsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUncheckedUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutHospitalNestedInput
@@ -991,13 +1213,19 @@ export type HospitalCreateWithoutAppointmentsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
+  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
-  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
 }
@@ -1010,13 +1238,19 @@ export type HospitalUncheckedCreateWithoutAppointmentsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultUncheckedCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutHospitalInput
 }
@@ -1045,13 +1279,19 @@ export type HospitalUpdateWithoutAppointmentsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
+  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
-  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
 }
@@ -1064,13 +1304,19 @@ export type HospitalUncheckedUpdateWithoutAppointmentsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUncheckedUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutHospitalNestedInput
 }
@@ -1083,13 +1329,19 @@ export type HospitalCreateWithoutLabResultsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
+  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
-  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
 }
@@ -1102,13 +1354,19 @@ export type HospitalUncheckedCreateWithoutLabResultsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutHospitalInput
 }
@@ -1137,13 +1395,19 @@ export type HospitalUpdateWithoutLabResultsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
+  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
-  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
 }
@@ -1156,13 +1420,19 @@ export type HospitalUncheckedUpdateWithoutLabResultsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutHospitalNestedInput
 }
@@ -1175,13 +1445,19 @@ export type HospitalCreateWithoutPrescriptionsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
+  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   pharmacies?: Prisma.PharmacyCreateNestedManyWithoutHospitalInput
-  hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
 }
@@ -1194,13 +1470,19 @@ export type HospitalUncheckedCreateWithoutPrescriptionsInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorUncheckedCreateNestedManyWithoutHospitalInput
-  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   hospitalUsers?: Prisma.HospitalUserUncheckedCreateNestedManyWithoutHospitalInput
+  pharmacies?: Prisma.PharmacyUncheckedCreateNestedManyWithoutHospitalInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultUncheckedCreateNestedManyWithoutHospitalInput
 }
@@ -1229,13 +1511,19 @@ export type HospitalUpdateWithoutPrescriptionsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
+  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
-  hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
 }
@@ -1248,13 +1536,19 @@ export type HospitalUncheckedUpdateWithoutPrescriptionsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUncheckedUpdateManyWithoutHospitalNestedInput
 }
@@ -1267,12 +1561,18 @@ export type HospitalCreateWithoutPharmaciesInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentCreateNestedManyWithoutHospitalInput
   doctors?: Prisma.DoctorCreateNestedManyWithoutHospitalInput
-  user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   hospitalUsers?: Prisma.HospitalUserCreateNestedManyWithoutHospitalInput
+  user: Prisma.UserCreateNestedOneWithoutHospitalsInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutHospitalInput
   labResults?: Prisma.LabResultCreateNestedManyWithoutHospitalInput
   prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutHospitalInput
@@ -1286,7 +1586,13 @@ export type HospitalUncheckedCreateWithoutPharmaciesInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
   userId: string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   departments?: Prisma.DepartmentUncheckedCreateNestedManyWithoutHospitalInput
@@ -1321,12 +1627,18 @@ export type HospitalUpdateWithoutPharmaciesInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutHospitalsNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
@@ -1340,7 +1652,13 @@ export type HospitalUncheckedUpdateWithoutPharmaciesInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
@@ -1359,6 +1677,12 @@ export type HospitalCreateManyUserInput = {
   address: string
   phone: string
   email: string
+  password: string
+  licenseNo: string
+  licenseTakeDate: Date | string
+  licenseExpiryDate: Date | string
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1371,12 +1695,18 @@ export type HospitalUpdateWithoutUserInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUpdateManyWithoutHospitalNestedInput
@@ -1390,12 +1720,18 @@ export type HospitalUncheckedUpdateWithoutUserInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departments?: Prisma.DepartmentUncheckedUpdateManyWithoutHospitalNestedInput
   doctors?: Prisma.DoctorUncheckedUpdateManyWithoutHospitalNestedInput
-  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   hospitalUsers?: Prisma.HospitalUserUncheckedUpdateManyWithoutHospitalNestedInput
+  pharmacies?: Prisma.PharmacyUncheckedUpdateManyWithoutHospitalNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutHospitalNestedInput
   labResults?: Prisma.LabResultUncheckedUpdateManyWithoutHospitalNestedInput
   prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutHospitalNestedInput
@@ -1409,6 +1745,12 @@ export type HospitalUncheckedUpdateManyWithoutUserInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseNo?: Prisma.StringFieldUpdateOperationsInput | string
+  licenseTakeDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  licenseExpiryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1421,8 +1763,8 @@ export type HospitalUncheckedUpdateManyWithoutUserInput = {
 export type HospitalCountOutputType = {
   departments: number
   doctors: number
-  pharmacies: number
   hospitalUsers: number
+  pharmacies: number
   appointments: number
   labResults: number
   prescriptions: number
@@ -1431,8 +1773,8 @@ export type HospitalCountOutputType = {
 export type HospitalCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   departments?: boolean | HospitalCountOutputTypeCountDepartmentsArgs
   doctors?: boolean | HospitalCountOutputTypeCountDoctorsArgs
-  pharmacies?: boolean | HospitalCountOutputTypeCountPharmaciesArgs
   hospitalUsers?: boolean | HospitalCountOutputTypeCountHospitalUsersArgs
+  pharmacies?: boolean | HospitalCountOutputTypeCountPharmaciesArgs
   appointments?: boolean | HospitalCountOutputTypeCountAppointmentsArgs
   labResults?: boolean | HospitalCountOutputTypeCountLabResultsArgs
   prescriptions?: boolean | HospitalCountOutputTypeCountPrescriptionsArgs
@@ -1465,15 +1807,15 @@ export type HospitalCountOutputTypeCountDoctorsArgs<ExtArgs extends runtime.Type
 /**
  * HospitalCountOutputType without action
  */
-export type HospitalCountOutputTypeCountPharmaciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PharmacyWhereInput
+export type HospitalCountOutputTypeCountHospitalUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HospitalUserWhereInput
 }
 
 /**
  * HospitalCountOutputType without action
  */
-export type HospitalCountOutputTypeCountHospitalUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.HospitalUserWhereInput
+export type HospitalCountOutputTypeCountPharmaciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PharmacyWhereInput
 }
 
 /**
@@ -1506,14 +1848,20 @@ export type HospitalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   address?: boolean
   phone?: boolean
   email?: boolean
+  password?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   userId?: boolean
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   departments?: boolean | Prisma.Hospital$departmentsArgs<ExtArgs>
   doctors?: boolean | Prisma.Hospital$doctorsArgs<ExtArgs>
+  hospitalUsers?: boolean | Prisma.Hospital$hospitalUsersArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   pharmacies?: boolean | Prisma.Hospital$pharmaciesArgs<ExtArgs>
-  hospitalUsers?: boolean | Prisma.Hospital$hospitalUsersArgs<ExtArgs>
   appointments?: boolean | Prisma.Hospital$appointmentsArgs<ExtArgs>
   labResults?: boolean | Prisma.Hospital$labResultsArgs<ExtArgs>
   prescriptions?: boolean | Prisma.Hospital$prescriptionsArgs<ExtArgs>
@@ -1528,7 +1876,13 @@ export type HospitalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   address?: boolean
   phone?: boolean
   email?: boolean
+  password?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   userId?: boolean
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1542,7 +1896,13 @@ export type HospitalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   address?: boolean
   phone?: boolean
   email?: boolean
+  password?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   userId?: boolean
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1556,18 +1916,24 @@ export type HospitalSelectScalar = {
   address?: boolean
   phone?: boolean
   email?: boolean
+  password?: boolean
+  licenseNo?: boolean
+  licenseTakeDate?: boolean
+  licenseExpiryDate?: boolean
   userId?: boolean
+  isActive?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type HospitalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "description" | "address" | "phone" | "email" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["hospital"]>
+export type HospitalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "description" | "address" | "phone" | "email" | "password" | "licenseNo" | "licenseTakeDate" | "licenseExpiryDate" | "userId" | "isActive" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["hospital"]>
 export type HospitalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   departments?: boolean | Prisma.Hospital$departmentsArgs<ExtArgs>
   doctors?: boolean | Prisma.Hospital$doctorsArgs<ExtArgs>
+  hospitalUsers?: boolean | Prisma.Hospital$hospitalUsersArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   pharmacies?: boolean | Prisma.Hospital$pharmaciesArgs<ExtArgs>
-  hospitalUsers?: boolean | Prisma.Hospital$hospitalUsersArgs<ExtArgs>
   appointments?: boolean | Prisma.Hospital$appointmentsArgs<ExtArgs>
   labResults?: boolean | Prisma.Hospital$labResultsArgs<ExtArgs>
   prescriptions?: boolean | Prisma.Hospital$prescriptionsArgs<ExtArgs>
@@ -1585,9 +1951,9 @@ export type $HospitalPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     departments: Prisma.$DepartmentPayload<ExtArgs>[]
     doctors: Prisma.$DoctorPayload<ExtArgs>[]
+    hospitalUsers: Prisma.$HospitalUserPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
     pharmacies: Prisma.$PharmacyPayload<ExtArgs>[]
-    hospitalUsers: Prisma.$HospitalUserPayload<ExtArgs>[]
     appointments: Prisma.$AppointmentPayload<ExtArgs>[]
     labResults: Prisma.$LabResultPayload<ExtArgs>[]
     prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
@@ -1600,7 +1966,13 @@ export type $HospitalPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     address: string
     phone: string
     email: string
+    password: string
+    licenseNo: string
+    licenseTakeDate: Date
+    licenseExpiryDate: Date
     userId: string
+    isActive: boolean
+    isVerified: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["hospital"]>
@@ -1999,9 +2371,9 @@ export interface Prisma__HospitalClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   departments<T extends Prisma.Hospital$departmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$departmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   doctors<T extends Prisma.Hospital$doctorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$doctorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DoctorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hospitalUsers<T extends Prisma.Hospital$hospitalUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$hospitalUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HospitalUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   pharmacies<T extends Prisma.Hospital$pharmaciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$pharmaciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PharmacyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  hospitalUsers<T extends Prisma.Hospital$hospitalUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$hospitalUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HospitalUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   appointments<T extends Prisma.Hospital$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   labResults<T extends Prisma.Hospital$labResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$labResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LabResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   prescriptions<T extends Prisma.Hospital$prescriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hospital$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2041,7 +2413,13 @@ export interface HospitalFieldRefs {
   readonly address: Prisma.FieldRef<"Hospital", 'String'>
   readonly phone: Prisma.FieldRef<"Hospital", 'String'>
   readonly email: Prisma.FieldRef<"Hospital", 'String'>
+  readonly password: Prisma.FieldRef<"Hospital", 'String'>
+  readonly licenseNo: Prisma.FieldRef<"Hospital", 'String'>
+  readonly licenseTakeDate: Prisma.FieldRef<"Hospital", 'DateTime'>
+  readonly licenseExpiryDate: Prisma.FieldRef<"Hospital", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Hospital", 'String'>
+  readonly isActive: Prisma.FieldRef<"Hospital", 'Boolean'>
+  readonly isVerified: Prisma.FieldRef<"Hospital", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Hospital", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Hospital", 'DateTime'>
 }
@@ -2488,30 +2866,6 @@ export type Hospital$doctorsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Hospital.pharmacies
- */
-export type Hospital$pharmaciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Pharmacy
-   */
-  select?: Prisma.PharmacySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Pharmacy
-   */
-  omit?: Prisma.PharmacyOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PharmacyInclude<ExtArgs> | null
-  where?: Prisma.PharmacyWhereInput
-  orderBy?: Prisma.PharmacyOrderByWithRelationInput | Prisma.PharmacyOrderByWithRelationInput[]
-  cursor?: Prisma.PharmacyWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PharmacyScalarFieldEnum | Prisma.PharmacyScalarFieldEnum[]
-}
-
-/**
  * Hospital.hospitalUsers
  */
 export type Hospital$hospitalUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2533,6 +2887,30 @@ export type Hospital$hospitalUsersArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.HospitalUserScalarFieldEnum | Prisma.HospitalUserScalarFieldEnum[]
+}
+
+/**
+ * Hospital.pharmacies
+ */
+export type Hospital$pharmaciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Pharmacy
+   */
+  select?: Prisma.PharmacySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Pharmacy
+   */
+  omit?: Prisma.PharmacyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PharmacyInclude<ExtArgs> | null
+  where?: Prisma.PharmacyWhereInput
+  orderBy?: Prisma.PharmacyOrderByWithRelationInput | Prisma.PharmacyOrderByWithRelationInput[]
+  cursor?: Prisma.PharmacyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PharmacyScalarFieldEnum | Prisma.PharmacyScalarFieldEnum[]
 }
 
 /**

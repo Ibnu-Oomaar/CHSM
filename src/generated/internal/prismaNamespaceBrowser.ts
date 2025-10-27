@@ -161,9 +161,9 @@ export const HospitalUserScalarFieldEnum = {
   phone: 'phone',
   email: 'email',
   password: 'password',
+  role: 'role',
   hospitalId: 'hospitalId',
   hospitalName: 'hospitalName',
-  role: 'role',
   createdAt: 'createdAt'
 } as const
 
@@ -178,7 +178,13 @@ export const HospitalScalarFieldEnum = {
   address: 'address',
   phone: 'phone',
   email: 'email',
+  password: 'password',
+  licenseNo: 'licenseNo',
+  licenseTakeDate: 'licenseTakeDate',
+  licenseExpiryDate: 'licenseExpiryDate',
   userId: 'userId',
+  isActive: 'isActive',
+  isVerified: 'isVerified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -214,6 +220,10 @@ export const DoctorScalarFieldEnum = {
   departmentId: 'departmentId',
   departmentName: 'departmentName',
   specialization: 'specialization',
+  nationalId: 'nationalId',
+  licenseNo: 'licenseNo',
+  licenseTakeDate: 'licenseTakeDate',
+  licenseExpiryDate: 'licenseExpiryDate',
   bio: 'bio',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
